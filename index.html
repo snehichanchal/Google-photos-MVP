@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Google Photos - AI Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/components.css">
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- ============================================== -->
+        <!-- PHOTOS VIEW (Landing Page)                     -->
+        <!-- ============================================== -->
+        <div id="view-photos" class="view-section active">
+            <header class="photos-header">
+                <div class="logo">
+                    <!-- Fake Google Photos Logo using CSS colors -->
+                    <span style="color:#4285F4;font-weight:bold;font-size:20px;">G</span><span
+                        style="color:#EA4335;font-weight:bold;font-size:20px;">o</span><span
+                        style="color:#FBBC05;font-weight:bold;font-size:20px;">o</span><span
+                        style="color:#4285F4;font-weight:bold;font-size:20px;">g</span><span
+                        style="color:#34A853;font-weight:bold;font-size:20px;">l</span><span
+                        style="color:#EA4335;font-weight:bold;font-size:20px;">e</span> Photos
+                </div>
+                <div class="header-actions">
+                    <span class="material-icons-outlined">add</span>
+                    <span class="material-icons-outlined">notifications_none</span>
+                    <div class="user-avatar">S</div>
+                </div>
+            </header>
+
+            <div class="main-content">
+                <!-- Promo banner (from Screenshot 2) -->
+                <div class="promo-banner">
+                    <span class="material-icons-outlined ai-icon">auto_awesome</span>
+                    <span class="promo-text">Your Photos experience is now more personalised. Manage settings.</span>
+                    <span class="material-icons-outlined promo-close">close</span>
+                </div>
+
+                <!-- Fake Memories section -->
+                <div class="memories-section">
+                    <div class="memory-card"
+                        style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');">
+                        <span>Across the table</span>
+                    </div>
+                    <div class="memory-card"
+                        style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');">
+                        <span>This beautiful world</span>
+                    </div>
+                    <div class="memory-card"
+                        style="background-image: url('https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80');">
+                        <span>Selfies<br><small>Sep - Nov 2019</small></span>
+                    </div>
+                </div>
+
+                <!-- All Photos Grid -->
+                <div class="all-photos-container">
+                    <div id="all-photos-grid" class="photo-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SEARCH VIEW                                    -->
+        <!-- ============================================== -->
+        <div id="view-search" class="view-section hidden">
+            <!-- Top Search Header (Back Arrow) -->
+            <header class="app-header">
+                <button class="icon-btn nav-switch-btn" data-target="view-photos">
+                    <span class="material-icons-outlined">arrow_back_ios_new</span>
+                </button>
+            </header>
+
+            <div class="main-content">
+                <section id="primary-filters" class="filters-section">
+                    <!-- Dropdown Filter Chips Row -->
+                    <div class="filter-dropdown-row" id="filter-dropdown-row">
+                        <button class="dropdown-chip" data-category="location">
+                            <span class="chip-label">Location</span> <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
+                        </button>
+                        <button class="dropdown-chip" data-category="year">
+                            <span class="chip-label">Year</span> <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
+                        </button>
+                        <button class="dropdown-chip" data-category="event">
+                            <span class="chip-label">Event</span> <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
+                        </button>
+                        <button class="dropdown-chip" data-category="people">
+                            <span class="chip-label">People</span> <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
+                        </button>
+                        <button class="dropdown-chip" data-category="season">
+                            <span class="chip-label">Season</span> <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
+                        </button>
+                    </div>
+
+                    <!-- Dropdown Menu (Hidden by default) -->
+                    <div id="filter-dropdown-menu" class="filter-dropdown-menu hidden">
+                        <div class="dropdown-list" id="dropdown-list">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="dropdown-footer">
+                            <button id="dropdown-reset-btn" class="btn-outline">Reset</button>
+                            <button id="dropdown-apply-btn" class="btn-primary">Show results</button>
+                        </div>
+                    </div>
+
+                    <!-- Large Search or Ask Input -->
+                    <div class="large-search-container">
+                        <input type="text" placeholder="Search or ask" disabled class="large-search-input" />
+                    </div>
+                </section>
+
+                <!-- Main Photo Grid Container -->
+                <main id="photo-grid-container" class="photo-grid-container hidden">
+                    <div class="grid-header">
+                        <h2 class="grid-title">Results</h2>
+                        <button id="clear-filters-btn" class="btn-text">Clear</button>
+                    </div>
+                    <div id="photo-grid" class="photo-grid">
+                        <!-- Photo cards will be injected here -->
+                    </div>
+                    <div id="empty-state" class="empty-state hidden">
+                        <span class="material-icons-outlined empty-icon">image_not_supported</span>
+                        <p>No photos found. Try combining different clues.</p>
+                    </div>
+                </main>
+            </div>
+
+            <!-- Floating Action Bar (Apply CTA) -->
+            <div id="action-bar" class="action-bar hidden">
+                <span id="selection-count" class="selection-count">0 Selected</span>
+                <button id="apply-btn" class="btn-primary">Search</button>
+            </div>
+
+            <!-- Floating Refinement Prompt Bar ("Found it? Yes / No") -->
+            <div id="refinement-prompt" class="refinement-prompt hidden">
+                <span class="prompt-text">Found it?</span>
+                <div class="prompt-actions">
+                    <button id="found-no-btn" class="btn-secondary">No</button>
+                    <button id="found-yes-btn" class="btn-secondary btn-positive">Yes</button>
+                </div>
+            </div>
+
+            <!-- Dynamic Secondary Visual Chips Drawer -->
+            <div id="secondary-drawer" class="secondary-drawer hidden">
+                <div class="drawer-header">
+                    <div class="drawer-title">
+                        <span class="material-icons-outlined ai-icon">auto_awesome</span>
+                        <span>Try these visual clues</span>
+                    </div>
+                </div>
+                <div class="chip-container secondary-chip-container" id="secondary-chips">
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- COLLECTIONS VIEW                               -->
+        <!-- ============================================== -->
+        <div id="view-collections" class="view-section hidden">
+            <header class="app-header">
+                <h2>Collections</h2>
+            </header>
+            <div class="main-content">
+                <div class="empty-state">
+                    <span class="material-icons-outlined empty-icon">collections</span>
+                    <p>Your albums and collections will appear here.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- GLOBALS (Lightbox, Bottom Nav)                 -->
+        <!-- ============================================== -->
+
+        <!-- Fullscreen Lightbox Modal -->
+        <div id="lightbox" class="lightbox hidden">
+            <button id="lightbox-close" class="lightbox-close">
+                <span class="material-icons-outlined">close</span>
+            </button>
+            <div class="lightbox-image-container">
+                <img id="lightbox-img" src="" alt="Full view" class="lightbox-image" />
+            </div>
+            <div class="lightbox-metadata">
+                <h2 id="lightbox-title" class="lightbox-title">Photo Title</h2>
+                <div id="lightbox-tags" class="lightbox-tags"></div>
+            </div>
+        </div>
+
+        <!-- Floating Bottom Navigation -->
+        <div class="bottom-nav-container">
+            <nav class="bottom-nav-pill" id="bottom-nav">
+                <a href="#" class="nav-item active nav-switch-btn" data-target="view-photos">
+                    <span class="material-icons">photo</span>
+                    <span class="nav-label">Photos</span>
+                </a>
+                <a href="#" class="nav-item nav-switch-btn" data-target="view-collections">
+                    <span class="nav-label">Collections</span>
+                </a>
+                <a href="#" class="nav-item nav-switch-btn" data-target="view-search">
+                    <span class="material-icons-outlined" style="color: var(--accent-color);">auto_awesome</span>
+                    <span class="nav-label">Ask</span>
+                </a>
+            </nav>
+            <button class="fab nav-switch-btn" data-target="view-search">
+                <span class="material-icons-outlined">auto_awesome</span>
+            </button>
+        </div>
+    </div>
+
+    <script type="module" src="src/js/app.js?v=3"></script>
+</body>
+
+</html>

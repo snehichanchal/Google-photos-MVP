@@ -1,0 +1,100 @@
+/* 
+ * src/css/main.css
+ * Core Design Tokens & Base Reset for AI-Assisted Google Photos MVP (Light Theme Redesign)
+ */
+
+:root {
+  --bg-color: #ffffff;
+  --surface-color: #f8f9fa;
+  --surface-hover: #f1f3f4;
+  --text-primary: #1f1f1f;
+  --text-secondary: #444746;
+  
+  --accent-color: #0b57d0;
+  --accent-hover: #0842a0;
+  --accent-bg: #c2e7ff;
+  --on-accent: #001d35;
+  
+  --search-bg: #eaf1fb;
+  
+  --border-color: #e0e2e0;
+  --divider-color: #e0e2e0;
+
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 24px;
+  --border-radius-pill: 32px;
+  
+  --z-nav: 100;
+  --z-action-bar: 90;
+  --z-drawer: 200;
+  --z-lightbox: 300;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; 
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.view-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 120px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 500;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}

@@ -1,0 +1,206 @@
+# Project: AI-Assisted Photo Search
+
+## 1. Objective
+
+Build a **user-friendly photo search experience** that helps users find old photos from **vague or incomplete memories**.
+
+Users should be able to combine initial clues such as **location, date, event/vibe, and people**, view targeted results, and refine the results using **dynamic visual clues** when the first search does not find the desired photo.
+
+**Core goal:** Help users find the desired photo without relying on manual scrolling or remembering exact keywords.
+
+---
+
+## 2. Target Users
+
+People who:
+
+* Have a large photo library.
+* Remember a photo through partial clues rather than exact details.
+* Struggle to describe or search for an old photo precisely.
+* Currently resort to scrolling through albums or timelines when search fails.
+
+---
+
+## 3. Scope of Work
+
+Build a **minimal Google Photos-like search interface** supporting this happy flow:
+
+### Step 1 — Open Search
+
+* Search tab/page.
+* Display memory-based filter chips:
+
+  * Event / Vibe
+  * Location / Setting
+  * Date / Year
+  * People
+
+### Step 2 — Select Initial Clues
+
+* User can select multiple clues.
+* Example: **Beach + 2024 + Party**
+* Show an **Apply** button.
+
+### Step 3 — View Initial Results
+
+* Display a photo grid based on the selected clues.
+* Show a bottom prompt:
+  **"Found it?"**
+
+  * Yes
+  * No
+
+### Step 4 — Refine Results
+
+When the user selects **No**:
+
+* Analyze the currently displayed result set.
+* Generate contextual secondary filters based on visible photos.
+* Example filters:
+
+  * White clothes
+  * Sunset
+  * Night / Dark
+  * Solo photo
+
+### Step 5 — Apply Secondary Filter
+
+* User selects a secondary clue.
+* Instantly narrow the photo grid.
+
+### Step 6 — Target Found
+
+* User identifies the desired photo.
+* Tapping the photo opens it in a full-screen viewer.
+* Flow ends successfully.
+
+---
+
+## 4. Minimal UI Requirements
+
+The interface should feel **familiar to Google Photos**, while remaining minimal and prototype-focused.
+
+Include:
+
+* Bottom navigation with **Search** selected.
+* Search/filter section.
+* Rounded filter chips.
+* Clear selected/unselected chip states.
+* Photo grid.
+* **Apply** CTA.
+* **Found it? Yes / No** interaction.
+* Dynamic refinement chips.
+* Full-screen photo viewer.
+
+Prioritize **clarity, simplicity, and easy scanning** over visual complexity.
+
+---
+
+## 5. Data & AI Simulation
+
+This is a **prototype**, so a real Google Photos backend or production AI model is not required.
+
+Use a **local/mock photo dataset** with metadata such as:
+
+```text
+photo_id
+image
+date
+year
+location
+event
+people
+visual_attributes
+```
+
+The filtering and dynamic refinement logic can be simulated using predefined metadata/tags.
+
+Example:
+
+```text
+Initial filters:
+Beach + 2024 + Party
+
+↓
+
+Results:
+Photo 1, Photo 2, Photo 3, Photo 4...
+
+↓
+
+User selects "No"
+
+↓
+
+Dynamic visual clues:
+White clothes | Sunset | Night | Solo
+
+↓
+
+User selects "White clothes"
+
+↓
+
+Filtered results:
+Photo 2, Photo 4
+```
+
+---
+
+## 6. Constraints
+
+* Do not build a complete Google Photos clone.
+* Do not implement real cloud photo storage.
+* Do not require Google account authentication.
+* Do not depend on external APIs unless necessary.
+* Use mock/local data for the prototype.
+* Focus only on the defined **happy flow**.
+* Keep the UI lightweight and easy to understand.
+* The prototype should be functional enough to demonstrate the complete search journey.
+
+---
+
+## 7. Deliverables
+
+### README.md
+
+Include:
+
+* Project overview
+* Objective
+* How to run the project
+* User flow
+* Data/model explanation
+* Key implementation decisions
+
+### Architecture Overview
+
+Document:
+
+* Frontend structure
+* Data/model structure
+* Search/filter logic
+* Dynamic refinement logic
+* Photo-viewer flow
+
+A simple architecture diagram is preferred.
+
+### Known Limitations
+
+Clearly document limitations such as:
+
+* Mock/local photo data
+* Simulated AI/visual recognition
+* Limited filter categories
+* No real Google Photos integration
+* No production-scale search infrastructure
+
+---
+
+## 8. Success Criteria
+
+The prototype is successful if a user can:
+
+**Remember vague clues → Combine clues → See relevant photos → Say "No" → Discover new visual clues → Refine results → Find and open the desired photo.**
+
+The experience should demonstrate that **photo search can progressively understand a user's memory instead of requiring the user to know the exact search query.**
